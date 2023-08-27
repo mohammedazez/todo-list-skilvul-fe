@@ -14,6 +14,8 @@ Buatlah sebuah aplikasi Todo List menggunakan React.js dan state management Redu
 
 
 - User dapat **melihat/memfilter** Todo List dengan status **completed** (done)
+  ![completed](https://github.com/mohammedazez/todo-list-skilvul-fe/assets/37678093/d69592ad-946d-4383-b6bf-f0bb09549823)
+
 
 - User dapat **menghapus** Todo List (done)
 
