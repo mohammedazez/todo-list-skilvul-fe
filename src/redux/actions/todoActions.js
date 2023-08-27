@@ -9,7 +9,7 @@ const fetchTodo = () => async (dispatch) => {
     });
     dispatch({
       type: FETCH_TODO,
-      payload: response.response,
+      payload: response.data,
     });
   } catch (error) {
     console.log(error);

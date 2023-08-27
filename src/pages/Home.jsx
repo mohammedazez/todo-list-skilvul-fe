@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import todoAction from "../redux/actions/todoActions";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const divStyle = {
     background: "#edf2f7",
   };
+
+  const todos = useSelector((state) => state.todo.dataList);
+  console.log("todos", todos.response);
+
+  useEffect(() => {
+    dispatch(todoAction.fetchTodo());
+  }, [dispatch]);
 
   return (
     <div
@@ -27,28 +38,20 @@ const Home = () => {
             </div>
           </div>
           <div>
-            <div className="flex mb-4 items-center">
-              <p className="w-full text-grey-darkest">
-                Add another component to Tailwind Components
-              </p>
-              <button className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green">
-                Done
-              </button>
-              <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">
-                Remove
-              </button>
-            </div>
-            <div className="flex mb-4 items-center">
-              <p className="w-full line-through text-green">
-                Submit Todo App Component to Tailwind Components
-              </p>
-              <button className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-grey border-grey hover:bg-grey">
-                Not Done
-              </button>
-              <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">
-                Remove
-              </button>
-            </div>
+            {todos.response &&
+              todos.response.map((item, index) => {
+                return (
+                  <div className="flex mb-4 items-center" key={index}>
+                    <p className="w-full text-grey-darkest">{item.activity}</p>
+                    <button className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green">
+                      Done
+                    </button>
+                    <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">
+                      Remove
+                    </button>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
