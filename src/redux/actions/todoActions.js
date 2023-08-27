@@ -7,7 +7,6 @@ import {
 import axios from "../../APIs/todoApi";
 
 const fetchTodo = (status) => async (dispatch) => {
-  console.log("status", status);
   try {
     const response = await axios({
       method: "get",
@@ -53,11 +52,14 @@ const deleteTodo = (id) => async (dispatch) => {
   }
 };
 
-const editTodo = (id) => async (dispatch) => {
+const editTodoStatus = (id, status) => async (dispatch) => {
   try {
     const update = await axios({
       method: "put",
       url: "/todo/" + id,
+      data: {
+        status: status,
+      },
     });
     dispatch({
       type: EDIT_TODO,
@@ -72,7 +74,7 @@ const todoAction = {
   fetchTodo,
   addTodo,
   deleteTodo,
-  editTodo,
+  editTodoStatus,
 };
 
 export default todoAction;

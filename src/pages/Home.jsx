@@ -14,8 +14,8 @@ const Home = () => {
     dispatch(todoAction.fetchTodo(status));
   }, [dispatch, status]);
 
-  const handleEdit = (id) => {
-    dispatch(todoAction.editTodo(id));
+  const handleChangeStatus = (id, status) => {
+    dispatch(todoAction.editTodoStatus(id, status));
     window.location.reload(false);
   };
 
@@ -61,8 +61,22 @@ const Home = () => {
               todos.response.map((item, index) => {
                 return (
                   <div className="flex mb-4 items-center" key={index}>
-                    <p className="w-full text-grey-darkest">{item.activity}</p>
-                    <div onClick={() => handleEdit(item.id)}>
+                    {item.status ? (
+                      <p
+                        className="w-full text-grey-darkest"
+                        onClick={() => handleChangeStatus(item.id, 0)}
+                      >
+                        {item.activity}
+                      </p>
+                    ) : (
+                      <p
+                        className="w-full line-through text-green"
+                        onClick={() => handleChangeStatus(item.id, 1)}
+                      >
+                        {item.activity}
+                      </p>
+                    )}
+                    <div>
                       <EditTodo />
                     </div>
                     <div onClick={() => handleDelete(item.id)}>
