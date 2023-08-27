@@ -3,12 +3,11 @@ import { useDispatch } from "react-redux";
 import todoAction from "../redux/actions/todoActions";
 
 const AddTodo = () => {
+  const dispatch = useDispatch();
   const [input, setInput] = useState({
     activity: "",
     status: true,
   });
-
-  const dispatch = useDispatch();
 
   const handleInput = (e) => {
     setInput({

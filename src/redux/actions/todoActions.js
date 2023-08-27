@@ -39,7 +39,6 @@ const deleteTodo = (id) => async (dispatch) => {
       method: "delete",
       url: "/todo/" + id,
     });
-
     dispatch({
       type: DELETE_TODO,
       payload: del,
