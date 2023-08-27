@@ -1,4 +1,4 @@
-import { FETCH_TODO, ADD_TODO } from "../actionType/todoType";
+import { FETCH_TODO, ADD_TODO, DELETE_TODO } from "../actionType/todoType";
 
 const initialState = {
   dataList: [],
@@ -12,6 +12,10 @@ const todoReducers = (state = initialState, action) => {
         dataList: action.payload,
       };
     case ADD_TODO:
+      return {
+        ...state,
+      };
+    case DELETE_TODO:
       return {
         ...state,
       };

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import todoAction from "../redux/actions/todoActions";
 import AddTodo from "../components/AddTodo";
+import EditTodo from "../components/EditTodo";
+import DeleteTodo from "../components/DeleteTodo";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -11,11 +13,15 @@ const Home = () => {
   };
 
   const todos = useSelector((state) => state.todo.dataList);
-  // console.log("todos", todos.response);
 
   useEffect(() => {
     dispatch(todoAction.fetchTodo());
   }, [dispatch]);
+
+  const handleClick = (id) => {
+    dispatch(todoAction.deleteTodo(id));
+    window.location.reload(false);
+  };
 
   return (
     <div
@@ -31,12 +37,10 @@ const Home = () => {
                 return (
                   <div className="flex mb-4 items-center" key={index}>
                     <p className="w-full text-grey-darkest">{item.activity}</p>
-                    <button className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green">
-                      Done
-                    </button>
-                    <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">
-                      Remove
-                    </button>
+                    <EditTodo />
+                    <div onClick={() => handleClick(item.id)}>
+                      <DeleteTodo />
+                    </div>
                   </div>
                 );
               })}

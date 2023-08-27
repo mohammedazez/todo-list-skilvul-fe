@@ -1,4 +1,4 @@
-import { ADD_TODO, FETCH_TODO } from "../actionType/todoType";
+import { FETCH_TODO, ADD_TODO, DELETE_TODO } from "../actionType/todoType";
 import axios from "../../APIs/todoApi";
 
 const fetchTodo = () => async (dispatch) => {
@@ -27,12 +27,32 @@ const addTodo = (values) => async (dispatch) => {
       type: ADD_TODO,
       payload: insert.data,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteTodo = (id) => async (dispatch) => {
+  try {
+    console.log("id", id);
+    const del = await axios({
+      method: "delete",
+      url: "/todo/" + id,
+    });
+
+    dispatch({
+      type: DELETE_TODO,
+      payload: del,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const todoAction = {
   fetchTodo,
   addTodo,
+  deleteTodo,
 };
 
 export default todoAction;
