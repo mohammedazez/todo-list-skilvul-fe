@@ -1,11 +1,17 @@
-import { FETCH_TODO, ADD_TODO, DELETE_TODO } from "../actionType/todoType";
+import {
+  FETCH_TODO,
+  ADD_TODO,
+  DELETE_TODO,
+  EDIT_TODO,
+} from "../actionType/todoType";
 import axios from "../../APIs/todoApi";
 
-const fetchTodo = () => async (dispatch) => {
+const fetchTodo = (status) => async (dispatch) => {
+  console.log("status", status);
   try {
     const response = await axios({
       method: "get",
-      url: "/todo",
+      url: `/todo?status=${status}`,
     });
     dispatch({
       type: FETCH_TODO,
@@ -34,7 +40,6 @@ const addTodo = (values) => async (dispatch) => {
 
 const deleteTodo = (id) => async (dispatch) => {
   try {
-    console.log("id", id);
     const del = await axios({
       method: "delete",
       url: "/todo/" + id,
@@ -48,10 +53,26 @@ const deleteTodo = (id) => async (dispatch) => {
   }
 };
 
+const editTodo = (id) => async (dispatch) => {
+  try {
+    const update = await axios({
+      method: "put",
+      url: "/todo/" + id,
+    });
+    dispatch({
+      type: EDIT_TODO,
+      payload: update,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const todoAction = {
   fetchTodo,
   addTodo,
   deleteTodo,
+  editTodo,
 };
 
 export default todoAction;

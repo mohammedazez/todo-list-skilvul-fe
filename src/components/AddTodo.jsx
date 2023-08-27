@@ -17,12 +17,14 @@ const AddTodo = () => {
   };
 
   const handleAddTodo = () => {
-    dispatch(todoAction.addTodo(input));
-    setInput({
-      activity: "",
-      status: true,
-    });
-    window.location.reload(false);
+    if (input.activity) {
+      dispatch(todoAction.addTodo(input));
+      setInput({
+        activity: "",
+        status: true,
+      });
+      window.location.reload(false);
+    }
   };
 
   return (
