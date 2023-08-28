@@ -2,7 +2,8 @@ import {
   FETCH_TODO,
   ADD_TODO,
   DELETE_TODO,
-  EDIT_TODO,
+  EDIT_TODO_ACTIVITY,
+  EDIT_TODO_STATUS,
 } from "../actionType/todoType";
 
 const initialState = {
@@ -24,7 +25,11 @@ const todoReducers = (state = initialState, action) => {
       return {
         ...state,
       };
-    case EDIT_TODO:
+    case EDIT_TODO_ACTIVITY:
+      return {
+        ...state,
+      };
+    case EDIT_TODO_STATUS:
       return {
         ...state,
       };

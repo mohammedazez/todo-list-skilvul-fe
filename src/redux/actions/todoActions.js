@@ -2,7 +2,8 @@ import {
   FETCH_TODO,
   ADD_TODO,
   DELETE_TODO,
-  EDIT_TODO,
+  EDIT_TODO_ACTIVITY,
+  EDIT_TODO_STATUS,
 } from "../actionType/todoType";
 import axios from "../../APIs/todoApi";
 
@@ -52,6 +53,24 @@ const deleteTodo = (id) => async (dispatch) => {
   }
 };
 
+const editTodoActivity = (id, activity) => async (dispatch) => {
+  try {
+    const update = await axios({
+      method: "put",
+      url: "/todo/" + id,
+      data: {
+        activity: activity,
+      },
+    });
+    dispatch({
+      type: EDIT_TODO_ACTIVITY,
+      payload: update,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const editTodoStatus = (id, status) => async (dispatch) => {
   try {
     const update = await axios({
@@ -62,7 +81,7 @@ const editTodoStatus = (id, status) => async (dispatch) => {
       },
     });
     dispatch({
-      type: EDIT_TODO,
+      type: EDIT_TODO_STATUS,
       payload: update,
     });
   } catch (error) {
@@ -75,6 +94,7 @@ const todoAction = {
   addTodo,
   deleteTodo,
   editTodoStatus,
+  editTodoActivity,
 };
 
 export default todoAction;

@@ -9,10 +9,20 @@ const Home = () => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todo.dataList);
   const [status, setStatus] = useState(null);
+  const [edit, setEdit] = useState({
+    id: null,
+    activity: "",
+  });
 
   useEffect(() => {
     dispatch(todoAction.fetchTodo(status));
   }, [dispatch, status]);
+
+  const handleChangeActivity = () => {
+    dispatch(todoAction.editTodoActivity(edit.id, edit.activity));
+    setEdit({ id: null, activity: "" });
+    window.location.reload(false);
+  };
 
   const handleChangeStatus = (id, status) => {
     dispatch(todoAction.editTodoStatus(id, status));
@@ -61,7 +71,25 @@ const Home = () => {
               todos.response.map((item, index) => {
                 return (
                   <div className="flex mb-4 items-center" key={index}>
-                    {item.status ? (
+                    {edit.id === item.id ? (
+                      <div className="flex items-center w-full">
+                        <input
+                          className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
+                          type="text"
+                          value={edit.activity}
+                          onChange={(e) =>
+                            setEdit({ ...edit, activity: e.target.value })
+                          }
+                        />
+
+                        <button
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          onClick={handleChangeActivity}
+                        >
+                          Update
+                        </button>
+                      </div>
+                    ) : item.status ? (
                       <p
                         className="w-full text-grey-darkest"
                         onClick={() => handleChangeStatus(item.id, 0)}
@@ -76,7 +104,15 @@ const Home = () => {
                         {item.activity}
                       </p>
                     )}
-                    <div>
+                    <div
+                      onClick={() =>
+                        setEdit({
+                          id: item.id,
+                          activity: item.activity,
+                          status: item.status,
+                        })
+                      }
+                    >
                       <EditTodo />
                     </div>
                     <div onClick={() => handleDelete(item.id)}>
