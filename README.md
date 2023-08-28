@@ -26,4 +26,6 @@ Buatlah sebuah aplikasi Todo List menggunakan React.js dan state management Redu
 
 
 
-- User dapat melakukan **edit** Todo List
+- User dapat melakukan **edit** Todo List (done)
+  ![update todo](https://github.com/mohammedazez/todo-list-skilvul-fe/assets/37678093/681fa4e0-4487-4341-a371-2c42a4d0cd82)
+
