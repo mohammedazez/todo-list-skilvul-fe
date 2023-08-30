@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Axios = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: "https://skilvul-todo-803865bd974c.herokuapp.com/api/v1",
 });
 
 Axios.interceptors.request.use(
