@@ -23,7 +23,6 @@ const AddTodo = () => {
         activity: "",
         status: true,
       });
-      // window.location.reload(false);
     }
   };
 

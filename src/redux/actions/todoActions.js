@@ -33,6 +33,7 @@ const addTodo = (values) => async (dispatch) => {
       type: ADD_TODO,
       payload: insert.data,
     });
+    window.location.reload(false);
   } catch (error) {
     console.log(error);
   }
@@ -48,6 +49,7 @@ const deleteTodo = (id) => async (dispatch) => {
       type: DELETE_TODO,
       payload: del,
     });
+    window.location.reload(false);
   } catch (error) {
     console.log(error);
   }
@@ -66,6 +68,7 @@ const editTodoActivity = (id, activity) => async (dispatch) => {
       type: EDIT_TODO_ACTIVITY,
       payload: update,
     });
+    window.location.reload(false);
   } catch (error) {
     console.log(error);
   }
@@ -84,6 +87,7 @@ const editTodoStatus = (id, status) => async (dispatch) => {
       type: EDIT_TODO_STATUS,
       payload: update,
     });
+    window.location.reload(false);
   } catch (error) {
     console.log(error);
   }

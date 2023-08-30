@@ -21,17 +21,14 @@ const Home = () => {
   const handleChangeActivity = () => {
     dispatch(todoAction.editTodoActivity(edit.id, edit.activity));
     setEdit({ id: null, activity: "" });
-    // window.location.reload(false);
   };
 
   const handleChangeStatus = (id, status) => {
     dispatch(todoAction.editTodoStatus(id, status));
-    // window.location.reload(false);
   };
 
   const handleDelete = (id) => {
     dispatch(todoAction.deleteTodo(id));
-    // window.location.reload(false);
   };
 
   return (
